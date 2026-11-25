@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#075985">
+<meta name="description" content="JLWWWC Southern Leyte private church management app">
+<link rel="manifest" href="manifest.webmanifest">
+<title>JLWWWC SLT | Church Management</title>
+<style>
+:root{--navy:#083b5c;--blue:#087eae;--cyan:#20b8d3;--pale:#e8f7fb;--ink:#183449;--muted:#698294;--line:#dce9ef;--bg:#f4f9fb;--white:#fff;--green:#16865b;--shadow:0 8px 24px rgba(8,59,92,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink)}
+button{font:inherit;cursor:pointer}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.sidebar{background:linear-gradient(165deg,#063653,#087eae 75%,#20b8d3);color:white;padding:24px 16px;display:flex;flex-direction:column;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;padding:4px 8px}.brand-logo img{display:block;width:100%;max-width:215px;height:auto;max-height:104px;object-fit:contain;background:#fff;border-radius:12px;padding:5px}.logo{width:46px;height:46px;border:1px solid #ffffff75;border-radius:15px;display:grid;place-items:center;font-size:25px;background:#ffffff18}.brand strong{display:block;font-size:17px;letter-spacing:.7px}.brand small{color:#d7f4fb;font-size:10px;letter-spacing:1px}
+.nav-label{font-size:10px;letter-spacing:1.5px;color:#bdeaf5;padding:0 12px;margin-bottom:7px}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:#e6f8fc;text-align:left;padding:11px 12px;border-radius:11px;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:#ffffff24;color:white}.nav .ico{width:22px;text-align:center;font-size:17px}.side-note{margin-top:auto;border:1px solid #ffffff40;border-radius:14px;padding:13px;font-size:12px;color:#e0f6fb;background:#ffffff12}
+main{min-width:0;padding:26px clamp(16px,3vw,42px) 40px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:28px}.eyebrow{font-size:11px;letter-spacing:1.5px;color:var(--blue);font-weight:750}.topbar h1{margin:4px 0 0;font-size:clamp(24px,3vw,32px);color:var(--navy)}.top-actions{display:flex;align-items:center;gap:10px}.date{color:var(--muted);font-size:13px}.avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--pale);color:var(--blue);font-weight:800;border:1px solid #c7eaf3}
+.welcome{background:linear-gradient(110deg,#075985,#0a91b8 70%,#21b7c9);color:white;border-radius:20px;padding:24px 26px;display:flex;justify-content:space-between;align-items:center;gap:20px;box-shadow:var(--shadow);position:relative;overflow:hidden}.welcome:after{content:"";position:absolute;width:210px;height:210px;border:1px solid #ffffff35;border-radius:50%;right:8%;top:-125px;box-shadow:0 0 0 25px #ffffff0c,0 0 0 55px #ffffff09}.welcome h2{margin:0 0 6px;font-size:22px}.welcome p{margin:0;color:#dff7fc}.verse{z-index:1;text-align:right;max-width:260px;font-size:13px;color:#e6fbff}.verse b{display:block;margin-top:7px;color:white}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:27px 0 13px}.section-head h2{font-size:17px;margin:0;color:var(--navy)}.section-head span{font-size:12px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:var(--shadow)}.stat-top{display:flex;justify-content:space-between;align-items:center}.stat-icon{width:39px;height:39px;border-radius:12px;background:var(--pale);display:grid;place-items:center;font-size:19px}.stat-label{font-size:12px;color:var(--muted);margin-top:13px}.stat-value{font-size:27px;font-weight:800;color:var(--navy);margin-top:2px}.stat-foot{font-size:11px;color:var(--muted);margin-top:4px}
+.content-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:15px}.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.quick{border:1px solid var(--line);background:white;border-radius:14px;padding:15px;text-align:left;color:var(--ink);transition:.15s}.quick:hover{border-color:#80cddd;transform:translateY(-2px)}.quick i{font-style:normal;font-size:22px;display:block;margin-bottom:9px}.quick b{font-size:13px;display:block}.quick small{font-size:11px;color:var(--muted)}
+.activity{display:grid;gap:0}.activity-row{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #edf2f5}.activity-row:last-child{border:0}.activity-icon{width:34px;height:34px;border-radius:10px;background:var(--pale);display:grid;place-items:center}.activity-row b{display:block;font-size:13px}.activity-row small{color:var(--muted);font-size:11px}
+.notice{background:#f0fbfd;border:1px solid #ccecf2;border-radius:14px;padding:14px 16px;margin-top:15px;font-size:12px;color:#38677a}.notice strong{color:var(--navy)}
+.page{display:none}.page.active{display:block}.empty{padding:30px;text-align:center;color:var(--muted)}.empty strong{display:block;color:var(--navy);font-size:18px;margin-bottom:6px}
+.mobile-head{display:none}.mobile-head img{width:190px;max-height:48px;object-fit:contain;background:#fff;border-radius:8px;padding:3px}.pill{background:#e6f7f9;color:#087eae;border-radius:99px;padding:5px 9px;font-size:10px;font-weight:750}
+.prayer-tools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.prayer-tools input{flex:1;min-width:140px;border:1px solid var(--line);border-radius:10px;padding:10px;color:var(--ink);font:inherit}.prayer-tools button,.prayer-item button{border:0;border-radius:10px;background:var(--blue);color:white;padding:9px 13px;font-weight:650}.prayer-list{display:grid;gap:8px}.prayer-item{display:flex;align-items:flex-start;gap:10px;padding:11px;border:1px solid var(--line);border-radius:12px;background:#fff}.prayer-item .prayer-text{flex:1;min-width:0}.prayer-item b{font-size:13px;display:block}.prayer-item small{font-size:11px;color:var(--muted);display:block;margin-top:3px}.prayer-item button{background:#eef7fa;color:#17658a;padding:6px 9px;font-size:11px}.prayer-empty{padding:16px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:950px){.stats{grid-template-columns:repeat(2,1fr)}.content-grid{grid-template-columns:1fr}}
+@media(max-width:650px){.app{display:block}.sidebar{display:none}.mobile-head{display:flex;background:#075985;color:white;padding:12px 16px;align-items:center;justify-content:space-between}.mobile-head b{font-size:14px}.mobile-head button{background:#ffffff20;border:1px solid #ffffff55;color:white;border-radius:9px;padding:7px 10px}.mobile-nav{display:flex;overflow:auto;gap:5px;background:#0a6e99;padding:7px}.mobile-nav button{white-space:nowrap;border:0;background:transparent;color:#e8f8fc;border-radius:8px;padding:8px 10px;font-size:12px}.mobile-nav button.active{background:#ffffff2b}main{padding:18px 14px 30px}.topbar{margin-bottom:17px}.date{display:none}.welcome{padding:20px;display:block}.verse{text-align:left;margin-top:15px}.stats{gap:9px}.card{padding:13px}.stat-value{font-size:23px}.quick-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="mobile-head"><img src="assets/jlwwwc-logo.png" alt="JLWWWC Southern Leyte logo"><span class="pill">PRIVATE DEMO</span></div>
+<div class="mobile-nav" id="mobileNav"></div>
+<div class="app">
+<aside class="sidebar">
+ <div class="brand brand-logo"><img src="assets/jlwwwc-logo.png" alt="Jesus the Living Water World Wide Church Southern Leyte logo"></div>
+ <div><div class="nav-label">MAIN MENU</div><nav class="nav" id="sideNav"></nav></div>
+ <div class="side-note">💧 <b>Living Water</b><br>“Whoever believes in me... rivers of living water will flow from within them.”<br><span style="opacity:.8">John 7:38</span></div>
+</aside>
+<main>
+ <div class="topbar"><div><div class="eyebrow">JESUS THE LIVING WATER WORLD WIDE CHURCH</div><h1 id="pageTitle">Church Dashboard</h1></div><div class="top-actions"><span class="date" id="today"></span><div class="avatar">A</div></div></div>
+ <section class="page active" id="dashboard">
+  <div class="welcome"><div><h2>Welcome to JLWWWC Southern Leyte</h2><p>Serving God. Growing together. Making disciples.</p></div><div class="verse">“Whoever believes in me... rivers of living water will flow from within them.”<b>John 7:38</b></div></div>
+  <div class="section-head"><h2>Church at a glance</h2><span>Sample figures · replace with actual records</span></div>
+  <div class="stats">
+   <div class="card"><div class="stat-top"><span class="stat-icon">👥</span><span class="pill">Members</span></div><div class="stat-label">Registered members</div><div class="stat-value">—</div><div class="stat-foot">Add member records to begin</div></div>
+   <div class="card"><div class="stat-top"><span class="stat-icon">🙏</span><span class="pill">Attendance</span></div><div class="stat-label">Last service attendance</div><div class="stat-value">—</div><div class="stat-foot">No attendance entered yet</div></div>
+   <div class="card"><div class="stat-top"><span class="stat-icon">📅</span><span class="pill">Activities</span></div><div class="stat-label">Upcoming activities</div><div class="stat-value">—</div><div class="stat-foot">Add church events and schedules</div></div>
+   <div class="card"><div class="stat-top"><span class="stat-icon">💙</span><span class="pill">Finance</span></div><div class="stat-label">Finance records</div><div class="stat-value">—</div><div class="stat-foot">Treasurer-only information</div></div>
+  </div>
+  <div class="section-head"><h2>Prayer Meeting Prayer List</h2><span>Prayer points and follow-up</span></div>
+  <div class="card">
+   <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+    <div><b style="color:var(--navy)">Prayer requests</b><div style="font-size:11px;color:var(--muted)">Add requests for the next prayer meeting</div></div>
+    <span class="pill">Session-only demo</span>
+   </div>
+   <form class="prayer-tools" id="prayerForm">
+    <input id="prayerName" aria-label="Name or group" placeholder="Name / group (optional)">
+    <input id="prayerRequest" aria-label="Prayer request" placeholder="Prayer point or request" required>
+    <button type="submit">+ Add</button>
+   </form>
+   <div class="prayer-list" id="prayerList"><div class="prayer-empty">No prayer points added yet. Add the first prayer request above.</div></div>
+   <div class="notice"><strong>Privacy reminder:</strong> Prayer requests can contain sensitive information. This prototype keeps entries only while this page remains open. Secure accounts and protected storage must be added before using real prayer requests.</div>
+  </div>
+  <div class="content-grid">
+   <div><div class="section-head"><h2>Quick access</h2><span>Choose a module</span></div><div class="quick-grid">
+    <button class="quick" data-page="members"><i>👥</i><b>Member Records</b><small>Profiles and contacts</small></button>
+    <button class="quick" data-page="attendance"><i>🙏</i><b>Attendance</b><small>Services and Bible study</small></button>
+    <button class="quick" data-page="events"><i>📅</i><b>Events & Schedules</b><small>Church calendar</small></button>
+    <button class="quick" data-page="ministries"><i>🤝</i><b>Ministries</b><small>Teams and assignments</small></button>
+    <button class="quick" data-page="finance"><i>💰</i><b>Church Finance</b><small>Income and expenses</small></button>
+    <button class="quick" data-page="reports"><i>📊</i><b>Reports</b><small>Monthly summaries</small></button>
+   </div></div>
+   <div><div class="section-head"><h2>Recent activity</h2><span class="pill">Demo</span></div><div class="card activity">
+    <div class="activity-row"><div class="activity-icon">🔐</div><div><b>Private church workspace created</b><small>Dashboard setup</small></div></div>
+    <div class="activity-row"><div class="activity-icon">💧</div><div><b>Living Water blue theme applied</b><small>App branding</small></div></div>
+    <div class="activity-row"><div class="activity-icon">🧭</div><div><b>Modules prepared</b><small>Ready for next development phase</small></div></div>
+   </div><div class="notice"><strong>Privacy reminder:</strong> This is a starter demo. Do not enter real member details, prayer requests, or financial information until secure user accounts and a protected database are connected.</div></div>
+  </div>
+ </section>
+ <section class="page" id="modulePage"><div class="card empty"><strong id="moduleTitle">Module</strong><span id="moduleDesc">This module is planned for the next development phase.</span><p><span class="pill">Coming in the next build</span></p></div></section>
+</main>
+</div>
+<script>
+const items=[
+ ['dashboard','▦','Dashboard','Church overview'],
+ ['members','♙','Members','Member profiles'],
+ ['attendance','✓','Attendance','Worship and study attendance'],
+ ['events','▣','Events & Schedules','Church calendar'],
+ ['ministries','♧','Ministries','Teams and assignments'],
+ ['finance','₱','Church Finance','Income and expenses'],
+ ['pastoral','♡','Pastoral Care','Visitation and prayer follow-up'],
+ ['biblestudy','▤','Bible Study','Discipleship groups'],\n ['prayer','♡','Prayer Meeting','Prayer list and requests'],
+ ['reports','▥','Reports','Church summaries'],
+ ['settings','⚙','Settings','Users and permissions']
+];
+const side=document.getElementById('sideNav'), mobile=document.getElementById('mobileNav');
+function navButton(item,cls=''){let b=document.createElement('button');b.type='button';b.dataset.page=item[0];b.className=cls;b.innerHTML=`<span class="${cls==='side'?'ico':''}">${item[1]}</span>${item[2]}`;b.addEventListener('click',()=>showPage(item[0]));return b}
+items.forEach((it,i)=>{side.appendChild(navButton(it,'side'));mobile.appendChild(navButton(it))});
+function showPage(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+ if(id==='dashboard'){document.getElementById('dashboard').classList.add('active');document.getElementById('pageTitle').textContent='Church Dashboard'}
+ else{document.getElementById('modulePage').classList.add('active');let it=items.find(x=>x[0]===id);document.getElementById('pageTitle').textContent=it[2];document.getElementById('moduleTitle').textContent=it[2];document.getElementById('moduleDesc').textContent=it[3]+' — this module will be built next.'}
+}
+document.querySelectorAll('.quick').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+document.getElementById('today').textContent=new Intl.DateTimeFormat('en-PH',{dateStyle:'full'}).format(new Date());
+const prayerForm=document.getElementById('prayerForm');
+const prayerList=document.getElementById('prayerList');
+let prayerEntries=[];
+function renderPrayerEntries(){
+ prayerList.innerHTML='';
+ if(!prayerEntries.length){prayerList.innerHTML='<div class="prayer-empty">No prayer points added yet. Add the first prayer request above.</div>';return}
+ prayerEntries.forEach((entry,index)=>{
+  const row=document.createElement('div');row.className='prayer-item';
+  const content=document.createElement('div');content.className='prayer-text';
+  const title=document.createElement('b');title.textContent=entry.request;
+  const detail=document.createElement('small');detail.textContent=entry.name||'Prayer request';
+  content.append(title,detail);
+  const remove=document.createElement('button');remove.type='button';remove.textContent='Remove';remove.setAttribute('aria-label','Remove prayer request');
+  remove.addEventListener('click',()=>{prayerEntries.splice(index,1);renderPrayerEntries()});
+  row.append(content,remove);prayerList.appendChild(row);
+ });
+}
+prayerForm.addEventListener('submit',event=>{
+ event.preventDefault();
+ const request=document.getElementById('prayerRequest').value.trim();
+ const name=document.getElementById('prayerName').value.trim();
+ if(!request)return;
+ prayerEntries.push({name,request});
+ prayerForm.reset();renderPrayerEntries();
+});
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+</script>
+</body></html>

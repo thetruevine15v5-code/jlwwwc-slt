@@ -1,0 +1,9 @@
+{
+  "name": "JLWWWC SLT Church Management",
+  "short_name": "JLWWWC SLT",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4f9fb",
+  "theme_color": "#075985",
+  "description": "Private church management app for JLWWWC Southern Leyte"
+}
